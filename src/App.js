@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React ,{useState} from 'react';
+
+import ChangeTheme from './component/changeTheme';
+import ProductForm from './component/productForm';
+import GetProducts from './component/getProducts';
+import { isEqual } from 'lodash';
 
 function App() {
+
+  const [theme, setTheme] = useState("light");
+
+  const updateTheme = (themeSelection) => {
+    return setTheme(themeSelection);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={isEqual(theme,"light")? "appDefault" : "app"}>
+      <ChangeTheme updateTheme={updateTheme} />
+      <ProductForm/>
+
+      <GetProducts/>
     </div>
   );
 }
